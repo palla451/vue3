@@ -3,7 +3,7 @@ import axios from "axios";
 
 const  state = {
         userLogged : null,
-        token: null,
+        token:  localStorage.getItem('token') || null, // Salva il token in localStorage,
         error: null
     };
 
@@ -15,7 +15,10 @@ const  getters = {
 
 const mutations = {
         setUserLogged (state, userLogged) { state.userLogged = userLogged},
-        setToken (state,token) {state.token = token},
+        setToken (state,token) {
+            state.token = token;
+            localStorage.setItem('token', token); // Salva il token in localStorage
+        },
         setError (state,error) {state.error = error},
         clearError(state) {state.error = null} // Imposta lo stato dell'errore su null
     };
@@ -35,8 +38,7 @@ const actions = {
         }
     };
 
-const modules = {
-    };
+const modules = {};
 
 export default {
     state,
